@@ -1,0 +1,57 @@
+.nav {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  text-align: center;
+  margin: 2rem auto;
+  color: white;
+}
+
+.img {
+  width: 35px;
+  height: 35px;
+  margin: auto 0;
+}
+
+.location {
+  padding: 0.5rem;
+  display: flex;
+}
+
+.location > p {
+  font-size: 45px;
+  margin: auto 0 auto 0.5rem;
+}
+
+.form {
+  position: relative;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.form > input {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.9rem 5rem;
+  color: white;
+  outline: none;
+}
+
+.form > input::-webkit-input-placeholder {
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.form > img {
+  position: absolute;
+  right: 6%;
+}
+
+.form > input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
