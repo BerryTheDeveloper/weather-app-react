@@ -1,3 +1,6 @@
+header {
+  height: 20%;
+}
 .nav {
   width: 90%;
   display: flex;
@@ -20,7 +23,7 @@
 }
 
 .location > p {
-  font-size: 45px;
+  font-size: 40px;
   margin: auto 0 auto 0.5rem;
 }
 
