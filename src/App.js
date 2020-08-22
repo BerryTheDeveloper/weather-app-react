@@ -1,51 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import "./styles/App.css";
-import rain from "./img/rainy.png";
-import wind from "./img/wind.png";
-import fog from "./img/fog.png";
-import humidity from "./img/humidity.png";
-import airPressure from "./img/airPressure.png";
+import Content from "./components/Content";
 
 function App() {
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [locationKey, setLocationKey] = useState("");
+  const [locationPlace, setLocationPlace] = useState("");
+  const [locationData, setLocationData] = useState([]);
+  const [rainProbability, setRainProbability] = useState("");
+
+  useEffect(() => {
+    const URL_CITY_SEARCH = `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.REACT_APP_APIKEY}&q=${query}&language=en-us&offset=5`;
+    fetch(URL_CITY_SEARCH)
+      .then((respone) => respone.json())
+      .then((data) => {
+        setLocationPlace(data[0].EnglishName);
+        setLocationKey(data[0].Key);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+
+    if (!loading) {
+      const URL_WEATHER_SEARCH = `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_APIKEY}&details=true`;
+      const URL_RAIN_SEARCH = `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${process.env.REACT_APP_APIKEY}&details=true`;
+
+      fetch(URL_WEATHER_SEARCH)
+        .then((respone) => respone.json())
+        .then((data) => {
+          setLocationData(data);
+        })
+        .catch((err) => console.log(err));
+
+      fetch(URL_RAIN_SEARCH)
+        .then((respone) => respone.json())
+        .then((data) => {
+          setRainProbability(data.DailyForecasts[0].Day.RainProbability);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [query, loading, locationKey]);
+
   return (
+    // <>
+    //   {loading ? (
+    //     <p style={{ textAlign: "canter" }}>Loading...</p>
+    //   ) : (
     <>
-      <Header />
-      <section className="content">
-        <div className="secondContent">
-          <div>
-            <img src={rain} alt="" />
-            <img src={wind} alt="" />
-          </div>
-          <div>
-            <p>Chance Of Rain</p>
-            <span>5%</span>
-            <p>Wind Speed</p>
-            <span>1.5 km/h</span>
-          </div>
-        </div>
-        <div className="mainContent">
-          <div>
-            <img src={fog} alt="fog" className="fog" />
-            <p>Fog</p>
-          </div>
-          <span>30C</span>
-          <p>Sunday</p>
-        </div>
-        <div className="secondContent">
-          <div>
-            <img src={humidity} alt="" />
-            <img src={airPressure} alt="" />
-          </div>
-          <div>
-            <p>Humidity</p>
-            <span>50%</span>
-            <p>Air Pressure</p>
-            <span>1009.483 PS</span>
-          </div>
-        </div>
-      </section>
+      <Header locationPlace={locationPlace} setQuery={setQuery} />
+      <Content locationData={locationData} rainProbability={rainProbability} />
     </>
+    //   )}
+    // </>
   );
 }
 

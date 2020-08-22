@@ -1,17 +1,17 @@
 import React from "react";
 import Search from "./Search";
-import { nav, img, location } from "../styles/Header.module.css";
+import "../styles/Header.css";
 import placeMarker from "../img/placeMarker.png";
 
-function Header() {
+function Header({ locationPlace, setQuery }) {
   return (
     <header>
-      <div className={nav}>
-        <div className={location}>
-          <img src={placeMarker} className={img} alt="location" />
-          <p>City</p>
+      <div className="nav">
+        <div className="location">
+          <img src={placeMarker} className="img" alt="location" />
+          <p>{locationPlace}</p>
         </div>
-        <Search />
+        <Search setQuery={setQuery} />
       </div>
     </header>
   );

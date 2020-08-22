@@ -1,0 +1,31 @@
+.mainContent {
+  text-align: center;
+}
+
+.mainContent .fog {
+  width: 59px;
+  height: 59px;
+}
+
+.mainContent > img {
+  width: 100px;
+  height: 100px;
+}
+.mainContent-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContent p {
+  font-size: 60px;
+}
+
+.mainContent-tags p {
+  font-size: 50px;
+}
+
+.mainContent span {
+  font-size: 80px;
+  font-weight: 700;
+}

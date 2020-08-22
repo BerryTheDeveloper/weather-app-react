@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import { img, form } from "../styles/Header.module.css";
+import "../styles/Header.css";
 import lightning from "../img/lightning-bulb.png";
 
-function Search() {
-  const [locationValue, setLocationValue] = useState("");
+function Search({ setQuery }) {
+  const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLocationValue(e.target.location.value);
-    console.log(locationValue);
-    e.target.reset();
+    setQuery(value);
+    if (value !== "") setValue("");
   };
+
   return (
     <>
-      <form className={form} onSubmit={handleSubmit}>
-        <input type="text" name="location" placeholder="Enter location...." />
-        <img src={lightning} className={img} alt="cloud" />
+      <form className="form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter location...."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <img src={lightning} className="img" alt="cloud" />
       </form>
     </>
   );
