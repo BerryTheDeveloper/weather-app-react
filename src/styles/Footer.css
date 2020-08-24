@@ -1,0 +1,49 @@
+footer {
+  height: 30%;
+  width: 100%;
+}
+
+footer > img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+footer > img:first-child {
+  margin-left: 1rem;
+}
+
+.carousel {
+  width: 90%;
+  margin: auto;
+}
+
+.carousel .card {
+  width: 80% !important;
+  height: 90%;
+  margin-left: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.carousel .card span {
+  display: block;
+  text-align: center;
+}
+
+.carousel .card .title {
+  font-size: 35px;
+  padding: 1rem 0 0.5rem 0;
+}
+
+.carousel .card .temp {
+  font-size: 53px;
+}
+.carousel .card .real-temp {
+  font-size: 18px;
+  padding: 0.5rem 0 1rem 0;
+}
+
+#arrow-next {
+  transform: rotate(180deg);
+  margin-right: 1rem;
+}
