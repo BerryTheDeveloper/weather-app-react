@@ -46,51 +46,61 @@ function SamplePrevArrow(props) {
 }
 
 function Footer({ fiveDaysData }) {
-  const card = [1, 2, 3, 4, 5, 6, 7];
   const days = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday ",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
-
-  const day = days[new Date().getDay()];
-  // const temp =
-  //   (fiveDaysData[0].Temperature.Maximum.Value +
-  //     fiveDaysData[0].Temperature.Miniumum.Value) /
-  //   2;
-  // const realTemp =
-  //   (fiveDaysData[0].RealFeelTemperature.Maximum.Value +
-  //     fiveDaysData[0].RealFeelTemperature.Miniumum.Value) /
-  //   2;
-  // console.log(day, temp, realTemp);
-  // console.log(fiveDaysData[0].Day);
+  let daysData = [];
+  if (fiveDaysData.length === 0) {
+    daysData = [...daysData];
+  } else {
+    daysData = fiveDaysData.map((day) => {
+      return {
+        date: days[new Date(day.Date).getDay()],
+        temp: (
+          (day.Temperature.Maximum.Value + day.Temperature.Minimum.Value) /
+          2
+        ).toFixed(1),
+        realTemp: (
+          (day.RealFeelTemperature.Maximum.Value +
+            day.RealFeelTemperature.Minimum.Value) /
+          2
+        ).toFixed(1),
+      };
+    });
+  }
 
   const settings = {
     dots: false,
     slidesToShow: 5,
     speed: 500,
     infinite: false,
-    nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow />,
   };
 
   return (
     <footer>
-      <div className="carousel">
-        <Slider {...settings}>
-          {fiveDaysData.map(({ Date, Temperature, RealFeelTemperature }) => (
-            <div className="card">
-              <span className="title">Monday</span>
-              <span className="temp"> 28 C</span>
-              <span className="real-temp">Feels like 30 C</span>
-            </div>
-          ))}
-        </Slider>
-      </div>
+      {daysData.length === 0 ? (
+        <p style={{ textAlign: "center", fontSize: "100px" }}>Loading...</p>
+      ) : (
+        <div className="carousel">
+          <Slider {...settings}>
+            {daysData.map((day) => (
+              <div className="card" key={day.date}>
+                <span className="title">{day.date}</span>
+                <span className="temp">{day.temp}°C</span>
+                <span className="real-temp">Feels like {day.realTemp}°C</span>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </footer>
   );
 }

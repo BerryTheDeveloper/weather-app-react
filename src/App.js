@@ -4,7 +4,7 @@ import Content from "./components/Content";
 import Footer from "./components/Footer";
 
 function App() {
-  const [query, setQuery] = useState("Radomsko");
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [loadingDisplay, setLoadingDisplay] = useState(false);
   const [locationKey, setLocationKey] = useState("");

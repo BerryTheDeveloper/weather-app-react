@@ -7,30 +7,34 @@ import "../styles/Content.css";
 function Content({ locationData, rainProbability }) {
   return (
     <>
-      {locationData.map(
-        (
-          {
+      {locationData.length === 0 ? (
+        <p style={{ textAlign: "center", fontSize: "100px" }}>Loading...</p>
+      ) : (
+        locationData.map(
+          ({
             WeatherText,
             Temperature,
             LocalObservationDateTime,
             RelativeHumidity,
             Pressure,
             Wind,
-          },
-          index
-        ) => (
-          <section className="content" key={WeatherText}>
-            <SecondContentLeft Wind={Wind} rainProbability={rainProbability} />
-            <MainConent
-              WeatherText={WeatherText}
-              Temperature={Temperature}
-              LocalObservationDateTime={LocalObservationDateTime}
-            />
-            <SecondContentRight
-              RelativeHumidity={RelativeHumidity}
-              Pressure={Pressure}
-            />
-          </section>
+          }) => (
+            <section className="content" key={WeatherText}>
+              <SecondContentLeft
+                Wind={Wind}
+                rainProbability={rainProbability}
+              />
+              <MainConent
+                WeatherText={WeatherText}
+                Temperature={Temperature}
+                LocalObservationDateTime={LocalObservationDateTime}
+              />
+              <SecondContentRight
+                RelativeHumidity={RelativeHumidity}
+                Pressure={Pressure}
+              />
+            </section>
+          )
         )
       )}
     </>
