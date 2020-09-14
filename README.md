@@ -20,4 +20,4 @@ REACT_APP_YOUR_API_KEY = "PASTE YOUR API KEY HERE"
 ---
 
 <a href="https://myweatheter.netlify.app/"><img src="/screenshot/reactWeatherApp.png" alt="weather app"/></a>
-<b><a href="https://myweatheter.netlify.app/">React Weather App - Demo</a><b>
+<p align="center"><b><a href="https://myweatheter.netlify.app/">React Weather App - Demo</a><b></p>
