@@ -1,61 +1,63 @@
 header {
-  height: 20%;
+    height: 20%;
+    z-index: 2;
+    position: relative;
 }
 .nav {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  text-align: center;
-  margin: 0 auto;
-  padding-top: 2rem;
-  color: white;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 2rem;
+    color: white;
 }
 
 .img {
-  width: 35px;
-  height: 35px;
-  margin: auto 0;
+    width: 35px;
+    height: 35px;
+    margin: auto 0;
 }
 
 .location {
-  padding: 0.5rem;
-  display: flex;
+    padding: 0.5rem;
+    display: flex;
 }
 
 .location > p {
-  font-size: 40px;
-  margin: auto 0 auto 0.5rem;
+    font-size: 40px;
+    margin: auto 0 auto 0.5rem;
 }
 
 .form {
-  position: relative;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
+    position: relative;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .form > input {
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  border-radius: 1.5rem;
-  padding: 0.9rem 5rem;
-  color: white;
-  outline: none;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.9rem 5rem;
+    color: white;
+    outline: none;
 }
 
 .form > input::-webkit-input-placeholder {
-  color: rgb(255, 255, 255);
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 500;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 500;
 }
 
 .form > img {
-  position: absolute;
-  right: 6%;
+    position: absolute;
+    right: 6%;
 }
 
 .form > input:focus {
-  border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
