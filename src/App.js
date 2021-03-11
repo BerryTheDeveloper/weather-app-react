@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useGeolocation } from "./hooks/useGeolocation";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
@@ -12,28 +13,33 @@ function App() {
     const [locationData, setLocationData] = useState([]);
     const [fiveDaysData, setFiveDaysData] = useState([]);
     const [rainProbability, setRainProbability] = useState("");
+    const geolocation = useGeolocation();
 
     useEffect(() => {
-        if (query === "" || !loading) return;
+        if (!loading || Object.keys(geolocation).length === 0) return;
+        if (geolocation.err !== null) {
+            console.error(geolocation.err);
+            return;
+        }
 
-        getWeather(query).then(({ daily }) => setWeatherData(daily));
+        getWeather(geolocation).then(({ daily }) => setWeatherData(daily));
         setLoading(false);
         setLoadingDisplay(true);
-    }, [query, loading]);
+    }, [loading, geolocation]);
 
-    const getWeather = async () => {
-        const URL_CITY_SEARCH = `https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_APIKEY}`;
-        let data;
-
+    const getWeather = async (geo) => {
+        const URL_CITY_SEARCH = `https://api.openweathermap.org/data/2.5/onecall?lat=${geo.lat}&lon=${geo.lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_APIKEY}`;
+        let data = {};
+        console.log(geo);
         try {
             const response = await fetch(URL_CITY_SEARCH);
             data = await response.json();
         } catch (error) {
             throw error;
         }
-        console.log(data);
         return data;
     };
+
     return (
         <>
             <Header
@@ -44,7 +50,8 @@ function App() {
             />
             {weatherData.length === 0 || weatherData === "undefined" ? (
                 <p style={{ textAlign: "center", fontSize: "100px" }}>
-                    Welcome to React weather App! Search for Location :)
+                    Welcome to React weather App! Loading your location...
+                    Please wait :)
                 </p>
             ) : (
                 <>

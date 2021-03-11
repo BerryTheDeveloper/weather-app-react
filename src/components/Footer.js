@@ -79,7 +79,7 @@ function Footer({ fiveDaysData }) {
         dots: false,
         slidesToShow: 4,
         speed: 500,
-        infinite: false,
+        infinite: true,
         prevArrow: <SamplePrevArrow />,
         nextArrow: <SampleNextArrow />,
     };
